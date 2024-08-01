@@ -82,7 +82,7 @@ class MOAgent:
         layer_agent = MOAgent._configure_layer_agent(layer_agent_config)
         main_agent = MOAgent._create_agent_from_system_prompt(
             system_prompt=system_prompt,
-            model_name=main_model,
+            model_name=main_model, # type: ignore
             **main_model_kwargs
         )
         return cls(
