@@ -21,7 +21,7 @@ layer_agent_config_def = {
     },
     "layer_agent_2": {
         "system_prompt": "Respond with a thought and then your response to the question. {helper_response}",
-        "model_name": "gemma-7b-it",
+        "model_name": "mixtral-8x7b-32768",
         "temperature": 0.7
     },
     "layer_agent_3": {
