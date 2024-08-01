@@ -89,7 +89,7 @@ def stream_response(messages: Iterable[ResponseChunk]):
 def set_moa_agent(
     main_model: str = default_config['main_model'],
     cycles: int = default_config['cycles'],
-    layer_agent_config: dict[dict[str, any]] = copy.deepcopy(layer_agent_config_def),
+    layer_agent_config: dict[str, any] = copy.deepcopy(layer_agent_config_def), # type: ignore
     main_model_temperature: float = 0.1,
     override: bool = False
 ):
@@ -117,7 +117,7 @@ def set_moa_agent(
     
     if override or ("moa_agent" not in st.session_state):
         st.session_state.moa_agent = MOAgent.from_config(
-            main_model=st.session_state.main_model,
+            main_model=st.session_state.main_model, # type: ignore
             cycles=st.session_state.cycles,
             layer_agent_config=cls_ly_conf,
             temperature=st.session_state.main_temp
@@ -207,8 +207,8 @@ with st.sidebar:
             try:
                 new_layer_config = json.loads(new_layer_agent_config)
                 set_moa_agent(
-                    main_model=new_main_model,
-                    cycles=new_cycles,
+                    main_model=new_main_model, # type: ignore
+                    cycles=new_cycles, # type: ignore
                     layer_agent_config=new_layer_config,
                     main_model_temperature=main_temperature,
                     override=True
@@ -262,7 +262,7 @@ if query := st.chat_input("Ask a question"):
     moa_agent: MOAgent = st.session_state.moa_agent
     with st.chat_message("assistant"):
         message_placeholder = st.empty()
-        ast_mess = stream_response(moa_agent.chat(query, output_format='json'))
+        ast_mess = stream_response(moa_agent.chat(query, output_format='json')) # type: ignore
         response = st.write_stream(ast_mess)
     
     st.session_state.messages.append({"role": "assistant", "content": response})
